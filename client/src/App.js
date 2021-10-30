@@ -29,7 +29,7 @@ class App extends Tasks {
           variant="outlined"
           type="submit"
           >
-            Add task
+          Add task
           </Button>
         </form>
         <div>
