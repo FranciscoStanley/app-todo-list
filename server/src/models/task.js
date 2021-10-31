@@ -10,7 +10,21 @@ const taskSchema = new Schema({
     completed:{
         type: Boolean,
         default:false
+    },
+
+    description:{
+        type: String,
+        required:true
+    },
+
+    dataConclusao:{
+        type: Date
+    },
+
+    arquivado:{
+        type: Boolean,
     }
+
 
 });
 

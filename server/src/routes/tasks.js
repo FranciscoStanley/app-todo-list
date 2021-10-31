@@ -13,7 +13,16 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find({arquivado:false});
+        res.send(tasks);
+    } catch (error) {
+        res.send(error);
+    } 
+});
+
+router.get("/search", async (req, res) => {
+    try {
+        const tasks = await Task.find({task: { $regex: new RegExp(req.query.q), $options: 'i' }}).limit(5);
         res.send(tasks);
     } catch (error) {
         res.send(error);
@@ -22,11 +31,12 @@ router.get("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const task = await Task.findOneAndUpdate(
+            await Task.findOneAndUpdate(
             {_id:req.params.id},
             req.body
         )
-        res.send(task);
+        const tasks = await Task.find({arquivado:false});
+        res.send(tasks);
     } catch (error) {
         res.send(error);
     }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 const apiUrl = "http://localhost:8080/api/tasks";
 
 export function getTasks() {
@@ -9,7 +10,12 @@ export function addTask(task) {
     return axios.post(apiUrl, task);
 }
 
-export function updateTask(id, task) {
+export function searchTask(search) {
+    return axios.get(apiUrl + '/search?q='+ search.search);
+}
+
+export function updateTask(id, req) {
+    const task = {...req, dataConclusao: moment().format(), arquivado: req.completed}
     return axios.put(apiUrl + "/" + id, task);
 }
 

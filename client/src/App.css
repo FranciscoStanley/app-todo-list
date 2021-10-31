@@ -11,14 +11,15 @@
 }
 
 .flex{
-  display: flex;
+  display: block;
   justify-content:center;
   align-items: center;
+  width: 100%;
 }
 
 .container{
-  width: 500px;
-  min-height: 300px;
+  width: 90%;
+  min-height: 500px;
   padding:10px;
 }
 
@@ -32,3 +33,9 @@
   margin-left: 10px;
 }
 
+.task-list{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  width: 100%;
+}

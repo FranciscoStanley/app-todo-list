@@ -1,5 +1,6 @@
 import { Component } from "react";
 import {
+    searchTask,
     addTask,
     getTasks,
     updateTask,
@@ -26,10 +27,20 @@ class Tasks extends Component {
         e.preventDefault();
         const originalTasks = this.state.tasks;
         try {
-            const { data } = await addTask({ task: this.state.currentTask });
+            const { data } = await addTask({ task: this.state.currentTask, description: this.state.description});
             const tasks = originalTasks;
             tasks.push(data);
-            this.setState({ tasks, currentTask: "" });
+            this.setState({ tasks, currentTask: "", description: ""});
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    handleSearch = async (search) => {
+        this.setState({ search: search });
+        try {
+            const { data } = await searchTask({ search: search });
+            this.setState({ tasks: data});
         } catch (error) {
             console.log(error);
         }
@@ -43,9 +54,10 @@ class Tasks extends Component {
             tasks[index] = { ...tasks[index] };
             tasks[index].completed = !tasks[index].completed;
             this.setState({ tasks });
-            await updateTask(currentTask, {
+            const task = await updateTask(currentTask, {
                 completed: tasks[index].completed,
             });
+            this.setState({ tasks: task?.data });
         } catch (error) {
             this.setState({ tasks: originalTasks });
             console.log(error);
