@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 module.exports = async ()=>{
     try{
         mongoose.connect(
-            "mongodb+srv://darkAdmin:dark%40%23%241719@cluster0.tkwfo.mongodb.net/test",
+            "mongodb+srv://dark:dark%40%231719@cluster0.em7vg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
             async(err)=>{
                 if(err) throw err;
                 console.log("conncted to db")
